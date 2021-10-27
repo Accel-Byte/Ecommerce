@@ -12,6 +12,7 @@ import { useGlobalState } from './state/provider';
 const App = () => {
   const [{ reloadpage }, dispatch] = useGlobalState();
   const tokenget = window.localStorage.getItem('token');
+  
   useEffect(() => {
     if (tokenget !== null) {
       const getdata = async () => {

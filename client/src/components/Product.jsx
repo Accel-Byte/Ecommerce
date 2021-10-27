@@ -1,7 +1,32 @@
+import Axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { domain } from '../env';
+import { useGlobalState } from '../state/provider';
 
 const Product = ({ item }) => {
+  const [{ profile }, dispatch] = useGlobalState();
+
+  const history = useHistory();
+
+  const addtocart = async (id) => {
+    profile !== null
+      ? await Axios({
+          method: 'post',
+          url: `${domain}/api/addtocart/`,
+          headers: {
+            Authorization: `token ${window.localStorage.getItem('token')}`,
+          },
+          data: { id: id },
+        }).then((response) => {
+          dispatch({
+            type: 'ADD_RELOADPAGE_DATA',
+            reloadpage: response,
+          });
+        })
+      : history.push('/login');
+  };
+  console.log(item);
   return (
     <>
       <div className="card mt-4">
@@ -22,18 +47,20 @@ const Product = ({ item }) => {
             </Link>
           </p>
           <div className="buy d-flex justify-content-between align-items-center">
-            <div className="price text-success">
+            <div className="price">
               <h5 className="mt-4">
                 {' '}
                 Price: <del className="text-danger">
-                  {item.marcket_price}$
+                  {item.market_price}$
                 </del>{' '}
-                {item.selling_price}$
+                <i className="text-success">{item.selling_price}$</i>
               </h5>
             </div>
-            <a href="/" className="btn btn-warning mt-3">
-              <i className="fas fa-shopping-cart"></i> Add to Cart
-            </a>
+            <Link onClick={() => addtocart(item.id)}>
+              <a href="/" className="btn btn-warning mt-3">
+                <i className="fas fa-shopping-cart"></i> Add to Cart
+              </a>
+            </Link>
           </div>
         </div>
       </div>

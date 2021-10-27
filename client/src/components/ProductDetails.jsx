@@ -1,163 +1,142 @@
-import Axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
-import { domain } from '../env'
-import { useGlobalState } from '../state/provider'
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { domain } from '../env';
+import { useGlobalState } from '../state/provider';
+import { Link } from 'react-router-dom';
 import Product from './Product'
 
 //https://codepen.io/seansky/pen/oNvOdwX
 
 const ProductDetails = () => {
-    const { id } = useParams()
-    const [{ profile }, dispatch] = useGlobalState()
-    const history = useHistory()
-    const [product, setProduct] = useState(null)
-    const [categoryproduct, setCategoryproduct] = useState(null)
-    useEffect(() => {
-        const getproduct = async () => {
-            await Axios({
-                method: 'get',
-                url: `${domain}/api/product/${id}/`,
-            }).then(response => {
-                setProduct(response?.data)
-                getcatdata(response?.data?.category["id"])
-            }).catch(error => {
-                console.log(error);
-            })
-        }
-        getproduct()
-    }, [id])
-    const getcatdata = async (id) => {
-        await Axios({
-            method: "get",
-            url: `${domain}/api/category/${id}/`
-        }).then(response => {
-            setCategoryproduct(response?.data)
+  const { id } = useParams();
+  const [{ profile }, dispatch] = useGlobalState();
+  const history = useHistory();
+  const [product, setProduct] = useState(null);
+  const [categoryproduct, setCategoryproduct] = useState(null);
+  useEffect(() => {
+    const getproduct = async () => {
+      await Axios({
+        method: 'get',
+        url: `${domain}/api/product/${id}/`,
+      })
+        .then((response) => {
+          setProduct(response?.data);
+          getcatdata(response?.data?.category['id']);
         })
-    }
-    const addtocart = async (id) => {
-        profile !== null ? (
-            await Axios({
-                method: 'post',
-                url: `${domain}/api/addtocart/`,
-                headers: {
-                    Authorization: `token ${window.localStorage.getItem('token')}`
-                },
-                data: { "id": id }
-            }).then(response => {
-                console.log(response);
-                dispatch({
-                    type: "ADD_RELOADPAGE_DATA",
-                    reloadpage: response
-                })
-            })
-        ) : (
-                history.push("/login")
-            )
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getproduct();
+  }, [id]);
+  const getcatdata = async (id) => {
+    await Axios({
+      method: 'get',
+      url: `${domain}/api/category/${id}/`,
+    }).then((response) => {
+      setCategoryproduct(response?.data);
+    });
+  };
+  const addtocart = async (id) => {
+    profile !== null
+      ? await Axios({
+          method: 'post',
+          url: `${domain}/api/addtocart/`,
+          headers: {
+            Authorization: `token ${window.localStorage.getItem('token')}`,
+          },
+          data: { id: id },
+        }).then((response) => {
+          console.log(response);
+          dispatch({
+            type: 'ADD_RELOADPAGE_DATA',
+            reloadpage: response,
+          });
+        })
+      : history.push('/login');
+  };
 
-    }
-    // console.log(categoryproduct[0].category_product);
-    return (
-        <div className="container">
-            {
-                product !== null && (
-                    <>
-       
-            <div class="container">
-        
-            <article class="card">
-                <div class="card-body">
-                        <div class="row">
-                            <aside class="col-md-6">
-                                    <article class="gallery-wrap">
-                                        <div class="card img-big-wrap">
-                                            <a href="#"> <img className="w-100" src={product.image} alt=""/></a>
-                                        </div> {/*}
-                                        <div class="thumbs-wrap">
-                                            <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
-                                            <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
-                                            <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
-                                            <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
-                                        </div>*/}
-                                    </article>
-                            </aside>
-                            <main class="col-md-6">
-                                <article>
-                                    {// <a href="#" class="text-primary btn-link">Clothes</a> 
-                                    }
-                                    <h3 class="title">{product.title}</h3>
-                                    <div>
-                                        <ul class="rating-stars">
-                                            <li  class="stars-active"> 
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-                                                <i class="fa fa-star"></i>  
-                                                
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-                                                <i class="fa fa-star"></i> 
-                                            </li>
-                                        </ul>
-                                        <span class="label-rating mr-3 text-muted">7/10</span>
-                                        <a href="#" class="btn-link  mr-3 text-muted"> <i class="fa fa-heart"></i> Save for later </a>
-                                        <a href="#" class="btn-link text-muted"> <i class="fa fa-book-open"></i> Compare </a>
-                                    </div> 
-            
-                                    <hr />
-                        
-                                    <div class="mb-3">
-                                        <h6>Short description</h6>
-                                        <ul class="list-dots mb-0">
-                                            {product.description}
-                                        </ul>
-                                    </div>
-                                    {/*
-                                    <div class="form-group">
-                                        <label class="text-muted">Available sizes</label>
-                                        <div>
-                                            <label class="js-check btn btn-check active mr-1">
-                                                <input type="radio" name="option_size" value="option1" checked="" />
-                                                <span>Small</span>
-                                            </label>
-                                            <label class="js-check btn btn-check mr-1">
-                                                <input type="radio" name="option_size" value="option1" />
-                                                <span>Medium</span>
-                                            </label>
-                                            <label class="js-check btn btn-check mr-1">
-                                                <input type="radio" name="option_size" value="option1" />
-                                                <span>Large</span>
-                                            </label>
-                                            <label class="js-check btn btn-check disabled">
-                                                <input type="radio" name="option_size" disabled="" value="option1" />
-                                                <span>Babies</span>
-                                            </label>  
-                                        </div>            
-                                    </div>
-                                    */}
-                                    <div class="mb-3">
-                                        <var class="price h4"><del>{product.marcket_price}$</del> {product.selling_price}$</var> <br />
-                                        <span class="monthly">{(product.selling_price/12).toFixed(2)}$ / monthly <a href="#" class="btn-link">installment </a></span>
-                                    </div> 
-                      
-                                    <div class="mb-4">
-                                        <a href="#" class="btn btn-primary mr-1">Buy now</a>
-                                        <a  onClick={() => addtocart(product.id)} className="btn btn-success" >Add to Cart </a>
-                                    </div>
-                                    
-                                </article> 
-                            </main>
-                        </div> 
-                </div> 
+  return (
+    <div className="container">
+      {product !== null && (
+        <>
+          <div className="container" style={{marginTop: "20px"}}>
+            <article className="card p-3">
+              <div className="card-body">
+                <div className="row">
+                  <aside className="col-md-6">
+                    <div className="h-100 d-flex align-items-center justify-content-center">
+                      {' '}
+                      <img
+                        className="w-75 mx-auto d-block"
+                        src={product.image}
+                        alt=""
+                      />
+                    </div>{' '}
+                  </aside>
+                  <main className="col-md-6">
+                    <h3 className="title">{product.title}</h3>
+                    <hr />
+                    <div className="mb-3">
+                      <h6>Short description</h6>
+                      <ul className="list-dots mb-0">{product.description}</ul>
+                    </div>
+                    <div className="mb-3">
+                      <div className="price">
+                        <h5 className="mt-4">
+                          {' '}
+                          Price:{' '}
+                          <del className="text-danger">
+                            {product.market_price}$
+                          </del>{' '}
+                          <i className="text-success">
+                          {product.selling_price}$
+                          </i>
+                        </h5>
+                      </div>
+                      <br />
+                      <span className="monthly">
+                        {(product.selling_price / 12).toFixed(2)}$ / monthly{' '}
+                        <a href="/" className="btn-link">
+                          installment{' '}
+                        </a>
+                      </span>
+                    </div>
+
+                    <div className="mb-4">
+                      <Link onClick={() => addtocart(product.id)}>
+                        <a href="/" className="btn btn-success mt-3">
+                          <i className="fas fa-shopping-basket"></i> Add to Cart
+                        </a>
+                      </Link>
+                      &nbsp;
+                      <Link onClick={() => addtocart(product.id)}>
+                        <a href="/" className="btn btn-warning mt-3">
+                          <i className="fas fa-shopping-cart"></i> Add to Cart
+                        </a>
+                      </Link>
+                    </div>
+                  </main>
+                </div>
+              </div>
             </article>
+          </div>
+          <div className="row">
+                <h1>Related Products</h1>
+                {
+                    categoryproduct !== null &&
+                    categoryproduct[0]?.category_product?.map((product, i) => (
+                        <div className="col-md-3 mt-2" key={i}>
+                            <Product item={product} />
+                        </div>
+                    ))
+                }
             </div>
-        
-                    </>
-                )
-            }
-         
-        </div>
-    )
-}
+        </>
+      )}
+    </div>
+  );
+};
 
-export default ProductDetails
+export default ProductDetails;

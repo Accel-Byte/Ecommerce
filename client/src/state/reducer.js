@@ -1,5 +1,7 @@
 export const initialstate = {
     profile: null,
+    carts: null,
+    reloadpage: null,
 }
 
 const reducer = (state, action) => {
@@ -9,6 +11,11 @@ const reducer = (state, action) => {
                 ...state,
                 profile: action.profile,
             };
+        case "ADD_CART":
+            return {
+                ...state,
+                carts: action.carts,
+            }
         default:
             return state;
     }
