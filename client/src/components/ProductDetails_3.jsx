@@ -57,12 +57,10 @@ const ProductDetails = () => {
 
     }
     // console.log(categoryproduct[0].category_product);
-    return (
-        <div className="container">
-            {
-                product !== null && (
-                    <>
-       
+	return (
+        <div className="App">
+         
+        <section class="section-content padding-y bg">
             <div class="container">
         
             <article class="card">
@@ -71,21 +69,20 @@ const ProductDetails = () => {
                             <aside class="col-md-6">
                                     <article class="gallery-wrap">
                                         <div class="card img-big-wrap">
-                                            <a href="#"> <img className="w-100" src={product.image} alt=""/></a>
-                                        </div> {/*}
+                                            <a href="#"> <img src={product.image} alt=""/></a>
+                                        </div> 
                                         <div class="thumbs-wrap">
                                             <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
                                             <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
                                             <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
                                             <a href="#" class="item-thumb"> <img src="assets/images/items/3.jpg" /></a>
-                                        </div>*/}
+                                        </div>
                                     </article>
                             </aside>
                             <main class="col-md-6">
                                 <article>
-                                    {// <a href="#" class="text-primary btn-link">Clothes</a> 
-                                    }
-                                    <h3 class="title">{product.title}</h3>
+                                    <a href="#" class="text-primary btn-link">Clothes</a>
+                                    <h3 class="title">Great product name goes here</h3>
                                     <div>
                                         <ul class="rating-stars">
                                             <li  class="stars-active"> 
@@ -109,10 +106,13 @@ const ProductDetails = () => {
                                     <div class="mb-3">
                                         <h6>Short description</h6>
                                         <ul class="list-dots mb-0">
-                                            {product.description}
+                                            <li>Made in Russia</li>
+                                            <li>Wolf leather </li>
+                                            <li>Rubber material bottom</li>
+                                            <li>Dark blue color</li>
                                         </ul>
                                     </div>
-                                    {/*
+                                    
                                     <div class="form-group">
                                         <label class="text-muted">Available sizes</label>
                                         <div>
@@ -134,15 +134,15 @@ const ProductDetails = () => {
                                             </label>  
                                         </div>            
                                     </div>
-                                    */}
+            
                                     <div class="mb-3">
-                                        <var class="price h4"><del>{product.marcket_price}$</del> {product.selling_price}$</var> <br />
-                                        <span class="monthly">{(product.selling_price/12).toFixed(2)}$ / monthly <a href="#" class="btn-link">installment </a></span>
+                                        <var class="price h4">$230.00</var> <br />
+                                        <span class="monthly">$32.00 / monthly <a href="#" class="btn-link">installment </a></span>
                                     </div> 
-                      
+            
                                     <div class="mb-4">
                                         <a href="#" class="btn btn-primary mr-1">Buy now</a>
-                                        <a  onClick={() => addtocart(product.id)} className="btn btn-success" >Add to Cart </a>
+                                        <a href="#" class="btn btn-light">Add to card</a>
                                     </div>
                                     
                                 </article> 
@@ -150,14 +150,26 @@ const ProductDetails = () => {
                         </div> 
                 </div> 
             </article>
+           
             </div>
+            
         
-                    </>
-                )
-            }
+        </section>
+    
+        <footer class="section-footer border-top padding-y">
+            <div class="container">
+                <p class="float-md-right"> 
+                    &copy; Copyright 2021 All rights reserved
+                </p>
+                <p>
+                    <a href="#">Terms and conditions</a>
+                </p>
+            </div>
+        </footer>
+        
          
         </div>
-    )
-}
+      )
+    }
 
 export default ProductDetails
