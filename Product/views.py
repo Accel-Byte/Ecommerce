@@ -24,8 +24,9 @@ class RegisterView(views.APIView):
         serializers = UserSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
-            return Response({"error": False, "message": f"user is created for '{serializers.data['username']}' ", "data": serializers.data})
-        return Response({"error": True, "message": "A user with that username already exists! Try Anather Username"})
+            return Response({"error": False, "message": f"user is created for '{serializers.data['username']}' ",
+                             "data": serializers.data})
+        return Response({"error": True, "message": "A user with that username already exists! Try Another Username"})
 
 
 class ProfileView(views.APIView):
@@ -37,6 +38,25 @@ class ProfileView(views.APIView):
             query = Profile.objects.get(prouser=request.user)
             serializer = ProfileSerializers(query)
             response_message = {"error": False, "data": serializer.data}
-        except:
-            response_message = {"error": True, "message": "Somthing is Wrong"}
+        except Exception as e:
+            print(e)
+            response_message = {"error": True, "message": "Something went Wrong"}
         return Response(response_message)
+
+
+class CategoryViewSet(viewsets.ViewSet):
+    def list(self, request):
+        query = Category.objects.all()
+        serializer = CatagorySerializer(query, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        query = Category.objects.get(id=pk)
+        serializer = CatagorySerializer(query)
+        data_data = serializer.data
+        all_data = []
+        category_product = Product.objects.filter(category_id=data_data['id'])
+        category_product_serializer = ProductSerializers(category_product, many=True)
+        data_data['category_product'] = category_product_serializer.data
+        all_data.append(data_data)
+        return Response(all_data)
