@@ -1,8 +1,8 @@
 import Axios from 'axios'
 import React from 'react';
 import {Link, useHistory} from 'react-router-dom'
-import {domain} from '../env'
-import {useGlobalState} from '../state/provider'
+import {domain} from '../../env'
+import {useGlobalState} from '../../state/provider'
 
 
 const Product = ({item}) => {
@@ -14,7 +14,7 @@ const Product = ({item}) => {
         profile !== null ? (
             await Axios({
                 method: 'post',
-                url: `${domain}/api/addtocart/`,
+                url: `${domain}/api/addToCart/`,
                 headers: {
                     Authorization: `token ${window.localStorage.getItem('token')}`
                 },

@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import {domain} from '../env';
-import Product from './Product';
+import {domain} from '../../env';
+import Product from '../Product/Product';
 
 const HomePage = () => {
     const [products, setProducts] = useState(null);

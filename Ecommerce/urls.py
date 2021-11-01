@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/login/', obtain_auth_token),
     path('api/', include('Product.urls')),
     path('api/', include('cart.urls')),
+    path('api/', include('order.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

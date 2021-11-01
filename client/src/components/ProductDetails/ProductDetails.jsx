@@ -1,9 +1,9 @@
 import Axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {domain} from '../env';
+import {domain} from '../../env';
 import {Link} from 'react-router-dom';
-import Product from './Product';
+import Product from '../Product/Product';
 
 const ProductDetails = () => {
     const {id} = useParams();

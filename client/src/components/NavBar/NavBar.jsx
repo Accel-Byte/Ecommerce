@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {useGlobalState} from '../state/provider';
+import {useGlobalState} from '../../state/provider';
 
 const NavBar = () => {
     const [{profile, cart_product_incomplete}, dispatch] = useGlobalState()

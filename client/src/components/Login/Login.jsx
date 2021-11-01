@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { domain, header2 } from '../env';
+import { domain, header2 } from '../../env';
 
 const Login = () => {
   const [username, setUsername] = useState('');

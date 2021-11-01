@@ -35,7 +35,7 @@ class ProfileView(views.APIView):
 
     def get(self, request):
         try:
-            query = Profile.objects.get(prouser=request.user)
+            query = Profile.objects.get(user=request.user)
             serializer = ProfileSerializers(query)
             response_message = {"error": False, "data": serializer.data}
         except Exception as e:

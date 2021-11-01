@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
 import Axios from 'axios';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import HomePage from './components/HomePage';
-import Login from './components/Login';
-import NavBar from './components/NavBar';
-import ProductDetails from './components/ProductDetails';
-import Register from './components/Register';
+import HomePage from './components/HomePage/HomePage';
+import Login from './components/Login/Login';
+import NavBar from './components/NavBar/NavBar';
+import ProductDetails from './components/ProductDetails/ProductDetails';
+import Register from './components/Register/Register';
+import Cart from "./components/Cart/Cart";
 import {domain} from './env';
 import {useGlobalState} from './state/provider';
 
@@ -81,8 +82,19 @@ const App = () => {
             <Switch>
                 <Route exact path="/" component={HomePage}/>
                 <Route exact path="/product/:id" component={ProductDetails}/>
-                <Route exact path="/login" component={Login}/>
-                <Route exact path="/register" component={Register}/>
+                {
+                    profile !== null ? (
+                            <>
+                                <Route exact path='/cart' component={Cart}/>
+                            </>
+                        ) :
+                        (
+                            <>
+                                <Route exact path='/login' component={Login}/>
+                                <Route exact path='/register' component={Register}/>
+                            </>
+                        )
+                }
                 <Route exact component={HomePage}/>
             </Switch>
         </BrowserRouter>
