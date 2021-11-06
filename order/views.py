@@ -51,3 +51,23 @@ class OrderViewSet(viewsets.ViewSet):
             print(e)
             message = {"error": True, "message": "Order Not Found"}
         return Response(message)
+
+    def create(self, request):
+        print(request.data)
+        cart_id = request.data["cartId"]
+        cart_obj = Cart.objects.get(id=cart_id)
+        address = request.data["address"]
+        mobile = request.data["mobile"]
+        email = request.data["email"]
+        cart_obj.complete = True
+        cart_obj.save()
+        created_order = Order.objects.create(
+            cart=cart_obj,
+            address=address,
+            mobile=mobile,
+            email=email,
+            total=cart_obj.total,
+            discount=3,
+        )
+
+        return Response({"message": "Order Completed", "cart id": cart_id, "order id": created_order.id})

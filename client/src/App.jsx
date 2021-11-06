@@ -9,6 +9,9 @@ import Register from './components/Register/Register';
 import Cart from "./components/Cart/Cart";
 import {domain} from './env';
 import {useGlobalState} from './state/provider';
+import OldOrders from "./components/OldOrder/OldOrder";
+import Order from "./components/Order/Order";
+import OldOrderDetails from "./components/OldOrderDetails/OldOrderDetails";
 
 const App = () => {
     const [{profile, reloadPage}, dispatch] = useGlobalState();
@@ -86,6 +89,9 @@ const App = () => {
                     profile !== null ? (
                             <>
                                 <Route exact path='/cart' component={Cart}/>
+                                 <Route exact path='/order' component={Order} />
+                                <Route exact path='/oldOrders' component={OldOrders} />
+                                <Route exact path='/oldorders/:id' component={OldOrderDetails} />
                             </>
                         ) :
                         (

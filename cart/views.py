@@ -70,7 +70,7 @@ class MyCart(viewsets.ViewSet):
         for cart in serializers.data:
             cart_product = CartProduct.objects.filter(cart=cart["id"])
             cart_product_serializer = CartProductSerializer(cart_product, many=True)
-            cart["cartProduct"] = cart_product_serializer.data
+            cart["cart_product"] = cart_product_serializer.data
             all_data.append(cart)
         return Response(all_data)
 

@@ -1,7 +1,10 @@
+import json
+
+from django.http import JsonResponse
 from rest_framework import views, viewsets, generics, mixins
 from .models import *
 from .serializers import *
-from django.contrib.auth.models import User
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -26,7 +29,7 @@ class RegisterView(views.APIView):
             serializers.save()
             return Response({"error": False, "message": f"user is created for '{serializers.data['username']}' ",
                              "data": serializers.data})
-        return Response({"error": True, "message": "A user with that username already exists! Try Another Username"})
+        return Response({"error": True, "message": serializers.errors, "status": status.HTTP_400_BAD_REQUEST})
 
 
 class ProfileView(views.APIView):

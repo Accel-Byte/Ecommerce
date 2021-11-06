@@ -6,7 +6,7 @@ const NavBar = () => {
     const [{profile, cart_product_incomplete}, dispatch] = useGlobalState()
     let cart_product_length = 0;
     if (cart_product_incomplete !== null) {
-        cart_product_length = cart_product_incomplete[0]?.cartProduct.length;
+        cart_product_length = cart_product_incomplete[0]?.cart_product.length;
     } else {
         cart_product_length = 0;
     }

@@ -9,7 +9,7 @@ const CartPage = () => {
     console.log(cart_product_incomplete)
     let cart_product_length;
     if (cart_product_incomplete !== null) {
-        cart_product_length = cart_product_incomplete[0]?.cartProduct.length;
+        cart_product_length = cart_product_incomplete[0]?.cart_product.length;
     } else {
         cart_product_length = 0;
     }
@@ -102,13 +102,13 @@ const CartPage = () => {
                         </thead>
                         <tbody>
                         {
-                            cart_product_incomplete[0]?.cartProduct.map((data, i) => (
+                            cart_product_incomplete[0]?.cart_product.map((data, i) => (
                                 <tr key={i}>
                                     <td>{i + 1}</td>
                                     <td>{data.product[0].title}</td>
-                                    <td>{data.price}</td>
+                                    <td>{"$" +data.price}</td>
                                     <td>{data.quantity}</td>
-                                    <td>{data.subtotal}</td>
+                                    <td>{"$" +data.subtotal}</td>
                                     <td>
                                         <button onClick={() => editCartProduct(data.id)} className="btn btn-info">-
                                         </button>
