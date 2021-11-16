@@ -12,6 +12,7 @@ import {useGlobalState} from './state/provider';
 import OldOrders from "./components/OldOrder/OldOrder";
 import Order from "./components/Order/Order";
 import OldOrderDetails from "./components/OldOrderDetails/OldOrderDetails";
+import Profile from "./components/Profile/Profile";
 
 const App = () => {
     const [{profile, reloadPage}, dispatch] = useGlobalState();
@@ -88,6 +89,7 @@ const App = () => {
                 {
                     profile !== null ? (
                             <>
+                                <Route exact path='/profile' component={Profile} />
                                 <Route exact path='/cart' component={Cart}/>
                                  <Route exact path='/order' component={Order} />
                                 <Route exact path='/oldOrders' component={OldOrders} />

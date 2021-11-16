@@ -78,7 +78,7 @@ class ProfileSerializers(serializers.ModelSerializer):
         return response
 
 
-class CatagorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = "__all__"

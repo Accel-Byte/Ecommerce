@@ -63,22 +63,22 @@ const Register = () => {
                     <h3 className="pb-3">Register</h3>
                     <div className="form-style">
                         <form>
-                             <div className="row form-group pb-3">
+                            <div className="row form-group pb-3">
                                 <div className="col">
                                     <input
-                                    type="text"
-                                    placeholder="First Name"
-                                    className="form-control"
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                />
+                                        type="text"
+                                        placeholder="First Name"
+                                        className="form-control"
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
                                 </div>
                                 <div className="col">
                                     <input
-                                    type="text"
-                                    placeholder="Last Name"
-                                    className="form-control"
-                                    onChange={(e) => setLastName(e.target.value)}
-                                />
+                                        type="text"
+                                        placeholder="Last Name"
+                                        className="form-control"
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
                                 </div>
                             </div>
                             <div className="form-group pb-3">
