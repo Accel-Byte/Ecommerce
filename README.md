@@ -2,27 +2,42 @@
 > #### Ecommerce app made up using django and Reactjs
 
 ## Snapshots
-### HomePage
-  ![HomePage](https://github.com/Accel-Byte/Stack-Underflow/blob/main/Images/HomePage.png?raw=true)
-  <br />
-
-### Profile
-  ![Profile](https://github.com/Accel-Byte/Stack-Underflow/blob/main/Images/Dashboard.png?raw=true)
-  <br />
- 
-### Product Detail
-  ![UploadImage](https://github.com/Accel-Byte/Stack-Underflow/blob/main/Images/UploadImage.png?raw=true)
-  <br />
-
 ### Register
-  ![Register](https://github.com/Accel-Byte/Stack-Underflow/blob/main/Images/SignUp.png?raw=true)
+  ![Register](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Register.png?raw=true)
   <br />
   
 ### Login
-  ![Login](https://github.com/Accel-Byte/Stack-Underflow/blob/main/Images/SinglePost(1).png?raw=true)
+  ![Login](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Login.png?raw=true)
+  <br />
+
+### Profile
+  ![Profile](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Profile.png?raw=true)
+  <br />
+
+### HomePage
+  ![HomePage](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/HomePage.jpeg?raw=true)
+  <br />
+
+### Pagination
+  ![Pagination](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Pagination.jpeg?raw=true)
   <br />
 
 
+### Product Detail
+  ![Product Detail](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/ProductDetail.png?raw=true)
+  <br />
+
+### Cart
+  ![Cart](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Cart.png?raw=true)
+  <br />
+ 
+### Order
+  ![Order](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Order.png?raw=true)
+  <br />
+
+### Order History
+  ![Order History](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/OrderHistory.png?raw=true)
+  <br />
 
 ## Prerequisite
 + Node.js
