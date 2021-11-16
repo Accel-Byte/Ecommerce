@@ -15,11 +15,11 @@
   <br />
 
 ### HomePage
-  ![HomePage](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/HomePage.jpeg?raw=true)
+  ![HomePage](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/HomePage.png?raw=true)
   <br />
 
 ### Pagination
-  ![Pagination](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Pagination.jpeg?raw=true)
+  ![Pagination](https://github.com/Accel-Byte/Ecommerce/blob/main/Images/Pagination.png?raw=true)
   <br />
 
 
