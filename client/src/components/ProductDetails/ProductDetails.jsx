@@ -1,11 +1,13 @@
 import Axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {domain} from '../../env';
-import {Link} from 'react-router-dom';
 import Product from '../Product/Product';
+import {useGlobalState} from "../../state/provider";
 
 const ProductDetails = () => {
+    const [{profile}, dispatch] = useGlobalState()
+    const history = useHistory()
     const {id} = useParams();
     const [product, setProduct] = useState(null);
     const [categoryProducts, setCategoryProducts] = useState(null);
@@ -24,7 +26,7 @@ const ProductDetails = () => {
                     console.log(error);
                 });
         };
-        getProduct();
+        getProduct().then().catch();
     }, [id]);
 
     const getCategoryData = async (id) => {
@@ -38,8 +40,26 @@ const ProductDetails = () => {
     };
 
     const addToCart = async (id) => {
-        console.log(id);
-    };
+        profile !== null ? (
+            await Axios({
+                method: 'post',
+                url: `${domain}/api/addToCart/`,
+                headers: {
+                    Authorization: `token ${window.localStorage.getItem('token')}`
+                },
+                data: {"id": id}
+            }).then(response => {
+                console.log(response);
+                dispatch({
+                    type: "ADD_RELOAD_PAGE_DATA",
+                    reloadPage: response
+                })
+            })
+        ) : (
+            history.push("/login")
+        )
+
+    }
 
     return (
         <div className="container">
@@ -91,18 +111,10 @@ const ProductDetails = () => {
                                         </div>
 
                                         <div className="mb-4">
-                                            <Link onClick={() => addToCart(product.id)}>
-                                                <a href="/" className="btn btn-success mt-3">
-                                                    <i className="fas fa-shopping-basket"/>
-                                                    Buy Product
-                                                </a>
-                                            </Link>
-                                            &nbsp;
-                                            <Link onClick={() => addToCart(product.id)}>
-                                                <a href="/" className="btn btn-warning mt-3">
-                                                    <i className="fas fa-shopping-cart"/> Add to Cart
-                                                </a>
-                                            </Link>
+                                            <button onClick={() => addToCart(product.id)}
+                                                    className="btn btn-warning mt-3">
+                                                <i className="fas fa-shopping-cart"/> Add to Cart
+                                            </button>
                                         </div>
                                     </main>
                                 </div>

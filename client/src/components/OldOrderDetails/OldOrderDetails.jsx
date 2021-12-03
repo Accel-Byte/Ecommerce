@@ -47,7 +47,7 @@ const OldOrderDetails = () => {
                                 <td>{"$" + details.total} </td>
                                 <td>{details.email}</td>
                                 <td>{details.mobile}</td>
-                                <td>{details.discount}</td>
+                                <td>{details.discount + "%"}</td>
                                 <td>{details.cart_product?.length}</td>
                             </>
                         )
